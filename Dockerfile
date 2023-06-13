@@ -23,5 +23,6 @@ ENV PRIORITY="0"
 ENV USERNAME="x"
 ENV PASSWORD="x"
 ENV COIN="monero"
+ENV DONATE_LEVEL="5"
 
-CMD /xmrig/build/xmrig --http-access-token=$ACCESS_TOKEN --url=$POOL_URL --user=$USERNAME --pass=$PASSWORD --rig-id=$WORKER_NAME --threads=$THREADS --priority=$PRIORITY --coin=$COIN
+CMD /xmrig/build/xmrig --http-access-token=$ACCESS_TOKEN --url=$POOL_URL --user=$USERNAME --pass=$PASSWORD --rig-id=$WORKER_NAME --threads=$THREADS --priority=$PRIORITY --coin=$COIN --donate-level=$DONATE_LEVEL
