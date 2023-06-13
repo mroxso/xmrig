@@ -8,11 +8,13 @@ COPY . /xmrig
 
 RUN mkdir build && cd build && cmake .. && make -j$(nproc)
 
-# FROM ubuntu:latest
+FROM ubuntu:latest as final
 
-# WORKDIR /xmrig
+RUN apt update && apt install libuv1-dev libssl-dev libhwloc-dev -y
 
-# COPY --from=builder /xmrig/build/xmrig /xmrig
+WORKDIR /xmrig
+
+COPY --from=builder /xmrig/build/xmrig .
 
 # VARIABLES
 ENV POOL_URL="pool.supportxmr.com:3333"
@@ -25,4 +27,4 @@ ENV PASSWORD="x"
 ENV COIN="monero"
 ENV DONATE_LEVEL="5"
 
-CMD /xmrig/build/xmrig --http-access-token=$ACCESS_TOKEN --url=$POOL_URL --user=$USERNAME --pass=$PASSWORD --rig-id=$WORKER_NAME --threads=$THREADS --priority=$PRIORITY --coin=$COIN --donate-level=$DONATE_LEVEL
+CMD /xmrig/xmrig --http-access-token=$ACCESS_TOKEN --url=$POOL_URL --user=$USERNAME --pass=$PASSWORD --rig-id=$WORKER_NAME --threads=$THREADS --priority=$PRIORITY --coin=$COIN --donate-level=$DONATE_LEVEL
